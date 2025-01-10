@@ -414,8 +414,8 @@ class ULX3S(Board):
 class ULX3SCTKey(Board):
     soc_kwargs = {"l2_size" : 2048} # Use Wishbone and L2 for memory accesses.
     def __init__(self):
-        from ctkey_ulx3s import BaseSoC
-        Board.__init__(self, BaseSoC, soc_capabilities={
+        from targets import ctkey_ulx3s
+        Board.__init__(self, ctkey_ulx3s.BaseSoC, soc_capabilities={
             # Communication
             "serial",
             # Storage
@@ -473,8 +473,8 @@ class OrangeCrab(Board):
 class OrangeCrabCTKey(Board):
     soc_kwargs = {"sys_clk_freq" : int(64e6) } # Increase sys_clk_freq to 64MHz (48MHz default).
     def __init__(self):
-        from ctkey_oc import BaseSoC
-        Board.__init__(self, BaseSoC, soc_capabilities={
+        from targets import ctkey_oc
+        Board.__init__(self, ctkey_oc.BaseSoC, soc_capabilities={
             # Communication
             "usb_acm",
             # Buses
