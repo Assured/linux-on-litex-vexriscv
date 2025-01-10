@@ -408,6 +408,21 @@ class ULX3S(Board):
             # Video,
             "framebuffer",
         })
+        
+# ULX3S CTKey support ------------------------------------------------------------------------------------
+
+class ULX3SCTKey(Board):
+    soc_kwargs = {"l2_size" : 2048} # Use Wishbone and L2 for memory accesses.
+    def __init__(self):
+        from ctkey_ulx3s import BaseSoC
+        Board.__init__(self, BaseSoC, soc_capabilities={
+            # Communication
+            "serial",
+            # Storage
+            "sdcard",
+            # Video,
+            "framebuffer",
+        })
 
 # ULX4M-LD-V2 support ------------------------------------------------------------------------------------
 class ULX4M_LD_V2(Board):
@@ -445,6 +460,21 @@ class OrangeCrab(Board):
     def __init__(self):
         from litex_boards.targets import gsd_orangecrab
         Board.__init__(self, gsd_orangecrab.BaseSoC, soc_capabilities={
+            # Communication
+            "usb_acm",
+            # Buses
+            "i2c",
+            # Storage
+            "sdcard",
+        })
+        
+# OrangeCrab Custom support -------------------------------------------------------------------------------
+
+class OrangeCrabCTKey(Board):
+    soc_kwargs = {"sys_clk_freq" : int(64e6) } # Increase sys_clk_freq to 64MHz (48MHz default).
+    def __init__(self):
+        from ctkey_oc import BaseSoC
+        Board.__init__(self, BaseSoC, soc_capabilities={
             # Communication
             "usb_acm",
             # Buses
