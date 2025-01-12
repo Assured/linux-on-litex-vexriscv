@@ -24,4 +24,5 @@ build/*
 *.o
 *.elf
 
+# Output files
 images/
