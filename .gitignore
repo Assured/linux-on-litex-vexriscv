@@ -23,3 +23,6 @@ build/*
 *.d
 *.o
 *.elf
+
+# Output files
+images/
