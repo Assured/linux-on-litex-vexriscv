@@ -23,3 +23,5 @@ build/*
 *.d
 *.o
 *.elf
+
+images/
