@@ -59,8 +59,8 @@ def main():
     parser.add_argument("--spi-data-width", default=8,   type=int,       help="SPI data width (max bits per xfer).")
     parser.add_argument("--spi-clk-freq",   default=1e6, type=int,       help="SPI clock frequency.")
     parser.add_argument("--fdtoverlays",    default="",                  help="Device Tree Overlays to apply.")
-    parser.add_argument("--root_device",   default=None,                help="ROOFS device.")
-    parser-add_argument("--initrd",        default=None,                help="Initrd.")
+    parser.add_argument("--root_device",   default=None,                help="ROOFS device. (Only device name, e.g. \"mmcblk0p2\")")
+    parser-add_argument("--initrd",        default=None,                help="Initrd. (\"enabled\" or \"disabled\")")
     VexRiscvSMP.args_fill(parser)
     args = parser.parse_args()
 
@@ -152,8 +152,8 @@ def main():
             soc.add_sdcard()
         if "ethernet" in board.soc_capabilities:
             soc.configure_ethernet(remote_ip=args.remote_ip)
-        #if "leds" in board.soc_capabilities:
-        #    soc.add_leds()
+        if "leds" in board.soc_capabilities:
+            soc.add_leds()
         if "rgb_led" in board.soc_capabilities:
             soc.add_rgb_led()
         if "switches" in board.soc_capabilities:
@@ -174,7 +174,7 @@ def main():
         builder.build(run=args.build, build_name=board_name)
 
         # DTS --------------------------------------------------------------------------------------
-        soc.generate_dts(board_name, root_device="mmcblk0p2", initrd="enabled")
+        soc.generate_dts(board_name, root_device=args.root_device, initrd=args.initrd)
         soc.compile_dts(board_name, args.fdtoverlays)
 
         # DTB --------------------------------------------------------------------------------------
