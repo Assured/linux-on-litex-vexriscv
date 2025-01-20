@@ -59,6 +59,8 @@ def main():
     parser.add_argument("--spi-data-width", default=8,   type=int,       help="SPI data width (max bits per xfer).")
     parser.add_argument("--spi-clk-freq",   default=1e6, type=int,       help="SPI clock frequency.")
     parser.add_argument("--fdtoverlays",    default="",                  help="Device Tree Overlays to apply.")
+    parser.add_argument("--root_device",   default=None,                help="ROOFS device.")
+    parser-add_argument("--initrd",        default=None,                help="Initrd.")
     VexRiscvSMP.args_fill(parser)
     args = parser.parse_args()
 
@@ -172,7 +174,7 @@ def main():
         builder.build(run=args.build, build_name=board_name)
 
         # DTS --------------------------------------------------------------------------------------
-        soc.generate_dts(board_name)
+        soc.generate_dts(board_name, root_device="mmcblk0p2", initrd="enabled")
         soc.compile_dts(board_name, args.fdtoverlays)
 
         # DTB --------------------------------------------------------------------------------------
