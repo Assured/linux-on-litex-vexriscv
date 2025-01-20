@@ -1,0 +1,4 @@
+config BR2_PACKAGE_HWAESMOD
+	bool "hwaesmod"
+	help
+	  kernel module for aes core
