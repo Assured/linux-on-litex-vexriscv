@@ -60,7 +60,7 @@ def main():
     parser.add_argument("--spi-clk-freq",   default=1e6, type=int,       help="SPI clock frequency.")
     parser.add_argument("--fdtoverlays",    default="",                  help="Device Tree Overlays to apply.")
     parser.add_argument("--root_device",   default=None,                help="ROOFS device. (Only device name, e.g. \"mmcblk0p2\")")
-    parser-add_argument("--initrd",        default=None,                help="Initrd. (\"enabled\" or \"disabled\")")
+    parser.add_argument("--initrd",        default=None,                help="Initrd. (\"enabled\" or \"disabled\")")
     VexRiscvSMP.args_fill(parser)
     args = parser.parse_args()
 
